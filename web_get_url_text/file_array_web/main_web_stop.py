@@ -98,8 +98,10 @@ def process_single_json(json_path, output_base_dir):
             return
 
         cookies = [
-            {'name': 'example_name', 'value': 'example_value','domain': '.example.com'},
-            {'name': 'example_name', 'value': 'example_value','domain': '.example.com'},
+            {'name': 'OptanonConsent', 
+             'value': 'isGpcEnabled=0&datestamp=Fri+Oct+25+2024+22%3A19%3A15+GMT%2B0900+(%E6%97%A5%E6%9C%AC%E6%A8%99%E6%BA%96%E6%99%82)&version=6.23.0&isIABGlobal=false&hosts=&consentId=88957a0d-9fc8-4ddf-b6be-b107a12edb47&interactionCount=1&landingPath=NotLandingPage&groups=C0004%3A1%2CC0003%3A1%2CC0002%3A1%2CC0001%3A1&AwaitingReconsent=false',
+             'domain': '.dlsite.com'},
+            {'name': 'age_check_done', 'value': '1', 'domain': '.dmm.co.jp'},
         ]
      
         crawler = WebTextCrawlerWithCookies(
@@ -188,8 +190,8 @@ def process_all_json_files(input_directory: str, output_base_dir: str, num_proce
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='High Performance Data Crawler')
-    parser.add_argument('--input', '-i', default="./class_example_url", help='Input JSON files directory path')
-    parser.add_argument('--output', '-o', default="example_data", help='Output base directory path')
+    parser.add_argument('--input', '-i', default="./class_kosen_url", help='Input JSON files directory path')
+    parser.add_argument('--output', '-o', default="kosen_data", help='Output base directory path')
     parser.add_argument('--single', '-s', help='Process single JSON file path')
     parser.add_argument('--processes', '-p', type=int, default=psutil.cpu_count(logical=True), help='Number of processes to use')
     parser.add_argument('--no-resume', action='store_true', help='Do not resume from previous state')

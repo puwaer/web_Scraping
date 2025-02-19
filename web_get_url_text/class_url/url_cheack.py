@@ -59,7 +59,7 @@ def merge_json_files(folder_path: str) -> tuple[List[str], int]:
     return list(all_urls), duplicates_count
 
 def main():
-    folder_path = "./example_url" # カレントディレクトリを使用。必要に応じて変更してください。
+    folder_path = "./dmm_url" # カレントディレクトリを使用。必要に応じて変更してください。
     
     try:
         merged_urls, duplicate_count = merge_json_files(folder_path)

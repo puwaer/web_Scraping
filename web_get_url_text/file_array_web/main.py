@@ -102,8 +102,8 @@ if __name__ == "__main__":
 
     
     parser = argparse.ArgumentParser(description='High Performance Data Crawler')
-    parser.add_argument('--input', '-i', default="./class_example_url", help='Input JSON files directory path')
-    parser.add_argument('--output', '-o', default="example_data", help='Output base directory path')
+    parser.add_argument('--input', '-i', default="./class_kosen_url", help='Input JSON files directory path')
+    parser.add_argument('--output', '-o', default="kosen_data", help='Output base directory path')
     parser.add_argument('--single', '-s', help='Process single JSON file path')
     parser.add_argument('--processes', '-p', type=int, default=psutil.cpu_count(logical=True), help='Number of processes to use')
     

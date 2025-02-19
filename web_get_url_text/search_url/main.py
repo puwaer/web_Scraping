@@ -4,7 +4,7 @@ from search_all_url_cheack import URLScraper
 
 def main():
     # スクレイピングの設定
-    base_url = "https://www.example.com/"
+    base_url = "https://www.numazu-ct.ac.jp/"
     file_name = "kosen"
     delay_time = 0.05
     batch_size = 200

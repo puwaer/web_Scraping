@@ -207,7 +207,7 @@ class URLScraper:
 def main():
     # スクレイピングの設定
     base_url='https://example.com',  # スクレイピングを開始するURL
-    file_name='example_urls',  # 出力するJSONファイル名
+    file_name='collected_urls',  # 出力するJSONファイル名
     delay_time=0.5,  # リクエスト間隔
     batch_size=5000,  # バッチサイズ
     max_pages=10000,  # 最大ページ数（Noneの場合は無制限）

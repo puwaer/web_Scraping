@@ -21,7 +21,7 @@ class JSONTextExtractor:
         self.input_path = Path(input_dir)
         self.output_path = Path(output_file)
         self.num_processes = num_processes or min(cpu_count(), self._count_json_files())
-        self.unique_texts = set()
+        self.extracted_data = []
         
         # ロガーの設定
         self.logger = logging.getLogger(__name__)
@@ -36,6 +36,20 @@ class JSONTextExtractor:
         """JSONファイルの数を数える"""
         return len(list(self.input_path.glob('*.json')))
 
+    def _extract_from_dict(self, data, extracted_data):
+        """
+        文字列またはリストからテキストフィールドを抽出する
+        
+        Args:
+            data (str, list): 処理する文字列またはリスト
+            extracted_data (list): 抽出したデータを追加するリスト
+        """
+        if isinstance(data, str):
+            extracted_data.append(data)
+        elif isinstance(data, list):
+            for item in data:
+                self._extract_from_dict(item, extracted_data)
+
     def _process_json_file(self, file_path):
         """
         1つのJSONファイルからテキストフィールドを抽出する
@@ -44,50 +58,32 @@ class JSONTextExtractor:
             file_path (Path): 処理するJSONファイルのパス
         
         Returns:
-            set: 抽出されたテキストのセット
+            list: 抽出されたデータのリスト
         """
-        texts = set()
+        extracted_data = []
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                
-                if isinstance(data, dict):
-                    self._extract_from_dict(data, texts)
-                elif isinstance(data, list):
-                    for item in data:
-                        if isinstance(item, dict):
-                            self._extract_from_dict(item, texts)
-                            
+                self._extract_from_dict(data, extracted_data)
         except json.JSONDecodeError as e:
             self.logger.error(f"JSON decode error in {file_path}: {e}")
         except Exception as e:
             self.logger.error(f"Unexpected error with {file_path}: {e}")
         
-        return texts
+        return extracted_data
 
-    def _extract_from_dict(self, data_dict, texts):
+    def calculate_memory_usage(self, extracted_data):
         """
-        辞書からテキストフィールドを抽出する
+        抽出したデータのメモリ使用量を計算する
         
         Args:
-            data_dict (dict): 処理する辞書
-            texts (set): 抽出したテキストを追加するセット
-        """
-        for key, value in data_dict.items():
-            if key.startswith('text') and isinstance(value, str):
-                texts.add(value)
-
-    def calculate_memory_usage(self, texts):
-        """
-        テキストのメモリ使用量を計算する
-        
-        Args:
-            texts (list): テキストのリスト
+            extracted_data (list): 抽出したデータのリスト
         
         Returns:
             float: メモリ使用量（MB）
         """
-        return sum(len(text.encode('utf-8')) for text in texts) / (1024 * 1024)
+        total_size = sum(len(json.dumps(item).encode('utf-8')) for item in extracted_data)
+        return total_size / (1024 * 1024)
 
     def extract_and_save(self):
         """テキストを抽出して保存する"""
@@ -110,43 +106,17 @@ class JSONTextExtractor:
             
             # 結果をマージ
             for result in results:
-                self.unique_texts.update(result)
-        
-        # 結果をソートしてリストに変換
-        all_texts = sorted(list(self.unique_texts))
+                self.extracted_data.extend(result)
         
         # 出力ファイルの保存
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
         
         with open(self.output_path, 'w', encoding='utf-8') as f:
-            json.dump(all_texts, f, ensure_ascii=False, indent=2)
+            json.dump(self.extracted_data, f, ensure_ascii=False, indent=2)
         
-        memory_usage = self.calculate_memory_usage(all_texts)
-        self.logger.info(f"\nExtracted {len(all_texts)} unique text fields to {self.output_path}")
-        self.logger.info(f"Memory usage per text: {memory_usage:.2f} MB")
-
-"""
-if __name__ == "__main__":
-    # ロギングの基本設定
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s'
-    )
-    
-    # 使用例
-    input_directory = "./kosen_data/document"
-    output_file = "document_text.json"
-    
-    # オプション: プロセス数を指定（例: CPUコア数の半分を使用）
-    num_processes = max(1, cpu_count() // 2)
-    
-    extractor = JSONTextExtractor(
-        input_dir=input_directory,
-        output_file=output_file,
-        num_processes=num_processes
-    )
-    extractor.extract_and_save()
-"""
+        memory_usage = self.calculate_memory_usage(self.extracted_data)
+        self.logger.info(f"\nExtracted {len(self.extracted_data)} items to {self.output_path}")
+        self.logger.info(f"Memory usage: {memory_usage:.2f} MB")
 
 if __name__ == "__main__":
     # ロギングの基本設定
@@ -156,7 +126,7 @@ if __name__ == "__main__":
     )
     
     # メインのディレクトリ
-    base_directory = "./text_dmm_1001-2000"
+    base_directory = "./text_dlsite_1-1000"
     
     # オプション: プロセス数を指定（例: CPUコア数の半分を使用）
     num_processes = max(1, cpu_count() // 2)

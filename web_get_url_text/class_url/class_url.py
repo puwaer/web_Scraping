@@ -76,9 +76,9 @@ def process_urls_to_separate_files(input_json_path, output_dir):
         return False
 
 # 使用例
-main_url = "https://www.example.com"
-input_file = "input_example.json"  # 入力JSONファイルのパス
-output_directory = "output_example_url"  # 出力ディレクトリ
+main_url = "https://www.numazu-ct.ac.jp/"
+input_file = "kosen_url/kosen_merged.json"  # 入力JSONファイルのパス
+output_directory = "class_kosen_url"  # 出力ディレクトリ
 
 # ファイルを処理
 success = process_urls_to_separate_files(input_file, output_directory)

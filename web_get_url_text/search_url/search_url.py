@@ -247,8 +247,8 @@ class URLScraper:
 
 def main():
     # スクレイピングの設定
-    base_url = "https://www.example.com/"
-    file_name = "example"
+    base_url = "https://www.numazu-ct.ac.jp/"
+    file_name = "kosen"
     delay_time = 0.01
     batch_size = 500
     max_pages = None  # None for unlimited, or set a number like 1000

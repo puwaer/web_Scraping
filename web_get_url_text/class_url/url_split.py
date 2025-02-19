@@ -48,7 +48,7 @@ def split_json_file(input_filename, num_splits):
         print(f"エラーが発生しました: {str(e)}")
 
 # 使用例：
-input_filename = "example.json"  # 分割したいJSONファイルのパス
+input_filename = "monthly.json"  # 分割したいJSONファイルのパス
 num_splits = 30               # 分割したい数
 
 # 実行
