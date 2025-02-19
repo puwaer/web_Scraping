@@ -22,6 +22,7 @@
 
 ## 作成されたデータセット
 このプログラムで作成されたデータセットは、以下のHugging Faceで公開されています。
+このようなデータセットを作成することが出来ます。
 - [dlsite-jp-v1](https://huggingface.co/datasets/puwaer/dlsite-jp-v1)
 - [dmm-fanza-jp-v1](https://huggingface.co/datasets/puwaer/dmm-fanza-jp-v1)
 
