@@ -1,4 +1,4 @@
-from r18_array_web_json_error import WebTextCrawlerWithCookies
+from web_get_url_text.array_web.cookies_array_web_json_error import WebTextCrawlerWithCookies
 from summary_delete_speed import extract_text_fields
 import json
 import glob
@@ -46,10 +46,7 @@ def process_single_json(json_path, output_base_dir):
     
     # クッキー設定
     cookies = [
-        {'name': 'OptanonConsent', 
-         'value': 'isGpcEnabled=0&datestamp=Fri+Oct+25+2024+22%3A19%3A15+GMT%2B0900+(%E6%97%A5%E6%9C%AC%E6%A8%99%E6%BA%96%E6%99%82)&version=6.23.0&isIABGlobal=false&hosts=&consentId=88957a0d-9fc8-4ddf-b6be-b107a12edb47&interactionCount=1&landingPath=NotLandingPage&groups=C0004%3A1%2CC0003%3A1%2CC0002%3A1%2CC0001%3A1&AwaitingReconsent=false',
-         'domain': '.dlsite.com'},
-        {'name': 'age_check_done', 'value': '1', 'domain': '.dmm.co.jp'},
+        {'name': 'example_cookie', 'value': 'example_value', 'domain': '.example.com'},
     ]
     
     # クローラーの初期化と実行

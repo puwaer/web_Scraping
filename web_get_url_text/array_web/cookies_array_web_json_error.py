@@ -202,7 +202,6 @@ if __name__ == "__main__":
     ]
 
     cookies = [
-        {'name': 'age_check', 'value': 'confirmed', 'domain': '.dlsite.com'},
         {'name': 'example_cookie', 'value': 'example_value', 'domain': '.example.com'},
     ]
 
