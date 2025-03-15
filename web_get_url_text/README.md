@@ -22,10 +22,10 @@ JSONファイルに保存されたURLリストを分割するスクリプト。
 
 ## 使い方
 1. `./search_url/main.py` を実行して、対象URLのリンクを収集する。
-2. `./array_web/file_json_main.py` を実行して、収集したURLからテキストデータを取得する。
-3. `./class_url/class_url.py` を実行して、収集したデータを整理する。
-4. `./class_url/url_check.py` を実行して、重複を除去したURLリストを作成する。
-5. `./class_url/url_split.py` を実行して、大量のURLを分割して扱いやすくする。
+2. `./class_url/class_url.py` を実行して、収集したデータを整理する。
+3. `./class_url/url_check.py` を実行して、重複を除去したURLリストを作成する。
+4. `./class_url/url_split.py` を実行して、大量のURLを分割して扱いやすくする。
+5. `./array_web/file_json_main.py` を実行して、収集したURLからテキストデータを取得する。
 
 ## 環境
 - Python 3.x
