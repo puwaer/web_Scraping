@@ -8,17 +8,17 @@
 ### 1. `./search_url/main.py`
 指定したURLで始まるリンクを再帰的に収集するスクリプト。
 
-### 2. `./array_web/file_json_main.py`
-収集したURLからウェブページの文章をスクレイピングし、JSONファイルにまとめるスクリプト。
-
-### 3. `./class_url/class_url.py`
+### 2. `./class_url/class_url.py`
 URLを読み込み、2番目のパスごとに個別のJSONファイルを作成するスクリプト。
 
-### 4. `./class_url/url_check.py`
+### 3. `./class_url/url_check.py`
 指定されたフォルダ内のすべてのJSONファイルを読み込み、URLを1つのリストにまとめ、重複を除去するスクリプト。
 
-### 5. `./class_url/url_split.py`
+### 4. `./class_url/url_split.py`
 JSONファイルに保存されたURLリストを分割するスクリプト。
+
+### 5. `./array_web/file_json_main.py`
+収集したURLからウェブページの文章をスクレイピングし、JSONファイルにまとめるスクリプト。
 
 ## 使い方
 1. `./search_url/main.py` を実行して、対象URLのリンクを収集する。
